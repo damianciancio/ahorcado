@@ -47,8 +47,4 @@ class Partida():
             self.resultado = True
         return self.resultado
         
-partida = Partida()
-partida.inicializar()
-partida.comenzar_partida()
 
-    
