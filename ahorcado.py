@@ -2,8 +2,11 @@ class Partida():
     def __init__(self):
         pass
     
-    def inicializar(self):
-        self.palabra = "hola"
+    def inicializar(self, palabra=None):
+        if palabra == None:
+            self.palabra = "hola"
+        else:
+            self.palabra = palabra
         self.resultado = None
         self.intentos_restantes = 7
         self.letras_acertadas = []
@@ -11,7 +14,7 @@ class Partida():
 
     def get_palabra(self):
         palabra = self.palabra
-	return palabra
+        return palabra
 
     def arriesgar(self, letra):
         acierto = False
@@ -43,8 +46,9 @@ class Partida():
         return str(input())
 
     def validar_terminado(self):
-        if len(self.get_palabra()) == len(self.letras_acertadas):
-            self.resultado = True
+        for letra in self.get_palabra():
+            if letra not in self.letras_acertadas:
+                self.resultado = False
+                return self.resultado
+        self.resultado = True
         return self.resultado
-        
-
