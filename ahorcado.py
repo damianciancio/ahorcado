@@ -10,7 +10,8 @@ class Partida():
         #self.letras_rechazadas = []
 
     def get_palabra(self):
-        return self.palabra
+        palabra = self.palabra
+	return palabra
 
     def arriesgar(self, letra):
         acierto = False
