@@ -33,6 +33,14 @@ class TestComenzarPartida(TestCase):
         terminado = partida.validar_terminado()
         self.assertTrue(terminado)
 
+    def test_validar_no_terminado(self):
+        partida = Partida()
+        palabra = "hola"
+        partida.inicializar(palabra)
+        partida.arriesgar("h")
+        self.assertFalse(partida.validar_terminado())
+
+
     def test_validar_terminado_con_palabra(self):
         partida = Partida()
         palabra = "hola"
@@ -64,3 +72,21 @@ class TestComenzarPartida(TestCase):
         result = partida.arriesgar_letra("h")
         self.assertTrue(result)
 
+    def test_longitud_palabra(self):
+        partida = Partida()
+        partida.inicializar('hola')
+        resultado = partida.get_longitud_palabra()
+        self.assertEquals(resultado, 4)
+
+    def test_seleccionar_palabra(self):
+        partida = Partida()
+        partida.inicializar()
+        resultado = partida.get_seleccionar_palabra()
+        self.assertIsNotNone(resultado)
+
+    def test_intentos_restantes(self):
+        partida = Partida()
+        partida.inicializar('pelota')
+        partida.arriesgar('h')
+        resultado = partida.get_intentos_restantes()
+        self.assertEquals(resultado, 6)

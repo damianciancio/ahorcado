@@ -1,10 +1,12 @@
+import random
+
 class Partida():
     def __init__(self):
         pass
     
     def inicializar(self, palabra=None):
         if palabra == None:
-            self.palabra = "hola"
+            self.palabra = self.get_seleccionar_palabra()
         else:
             self.palabra = palabra
         self.resultado = None
@@ -15,6 +17,18 @@ class Partida():
     def get_palabra(self):
         palabra = self.palabra
         return palabra
+
+    def get_longitud_palabra(self):
+        longitud = len(self.get_palabra())
+        return longitud 
+
+    def get_seleccionar_palabra(self):
+        lista_palabras = ['mate', 'pelota', 'vaso', 'computadora', 'remera', 'teclado', 'libro']
+        palabra_seleccionada = random.choice(lista_palabras)
+        return palabra_seleccionada
+
+    def get_intentos_restantes(self):
+        return self.intentos_restantes
 
     def arriesgar(self, letra):
         if len(letra) > 1:
@@ -36,15 +50,13 @@ class Partida():
         return acierto
 
     def comenzar_partida(self):
-        while self.resultado == None and self.intentos_restantes != 0:
+        while not self.validar_terminado():
             letra = self.solicitar_letra()
             if self.arriesgar(letra):
                 print "Muy bien!"
             else:
                 print "Fallaste!"
-            self.validar_terminado()
-
-        if self.resultado:
+        if self.validar_si_gano():
             print "Ganaste! la palabra era " + self.get_palabra()
         else: 
             print "Perdiste.. la palabra era " + self.get_palabra()
@@ -53,17 +65,21 @@ class Partida():
         print "Ingrese una o arriesgue una palabra: "
         return str(input())
 
-    def validar_terminado(self):
+    def validar_si_gano(self):
         for acertada in self.letras_acertadas:
             if acertada == self.get_palabra():
-                self.resultado = True
                 return True
         for letra in self.get_palabra():
             if letra not in self.letras_acertadas:
-                self.resultado = False
-                return self.resultado
-        self.resultado = True
-        return self.resultado
+                return False
+        if (len(self.letras_acertadas) == 0):
+            return False
+        return True
+
+    def validar_terminado(self):
+        if self.validar_si_gano() or self.intentos_restantes == 0:
+            return True
+        return False
 
     def arriesgar_palabra(self, palabra):
         if self.get_palabra() == palabra:
