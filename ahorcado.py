@@ -1,10 +1,12 @@
+import random
+
 class Partida():
     def __init__(self):
         pass
     
     def inicializar(self, palabra=None):
         if palabra == None:
-            self.palabra = "hola"
+            self.palabra = self.get_seleccionar_palabra()
         else:
             self.palabra = palabra
         self.resultado = None
@@ -15,6 +17,18 @@ class Partida():
     def get_palabra(self):
         palabra = self.palabra
         return palabra
+
+    def get_longitud_palabra(self):
+        longitud = len(self.get_palabra())
+        return longitud 
+
+    def get_seleccionar_palabra(self):
+        lista_palabras = ['mate', 'pelota', 'vaso', 'computadora', 'remera', 'teclado', 'libro']
+        palabra_seleccionada = random.choice(lista_palabras)
+        return palabra_seleccionada
+
+    def get_intentos_restantes(self):
+        return self.intentos_restantes
 
     def arriesgar(self, letra):
         acierto = False
@@ -52,3 +66,4 @@ class Partida():
                 return self.resultado
         self.resultado = True
         return self.resultado
+
