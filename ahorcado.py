@@ -50,12 +50,15 @@ class Partida():
         return acierto
 
     def comenzar_partida(self):
+        print "La longitud de la palabra es: " + str(self.get_longitud_palabra())
         while not self.validar_terminado():
+            print "Te quedan " + str(self.get_intentos_restantes()) + " intentos restantes"
             letra = self.solicitar_letra()
             if self.arriesgar(letra):
                 print "Muy bien!"
             else:
                 print "Fallaste!"
+
         if self.validar_si_gano():
             print "Ganaste! la palabra era " + self.get_palabra()
         else: 
