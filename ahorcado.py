@@ -52,3 +52,9 @@ class Partida():
                 return self.resultado
         self.resultado = True
         return self.resultado
+
+    def arriesgar_palabra(self, palabra):
+        if self.get_palabra() == palabra:
+            return True
+        else:
+            return False

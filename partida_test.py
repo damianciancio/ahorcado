@@ -33,3 +33,18 @@ class TestComenzarPartida(TestCase):
         
         terminado = partida.validar_terminado()
         self.assertTrue(terminado)
+
+    def test_arriesgar_palabra_valida(self):
+        partida = Partida()
+        palabra = "hola"
+        partida.inicializar(palabra)
+        result = partida.arriesgar_palabra("hola")
+        self.assertTrue(result)
+
+
+    def test_arriesgar_palabra_invalida(self):
+        partida = Partida()
+        palabra = "hola"
+        partida.inicializar(palabra)
+        result = partida.arriesgar_palabra("chau")
+        self.assertFalse(result)
