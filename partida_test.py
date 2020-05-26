@@ -22,17 +22,25 @@ class TestComenzarPartida(TestCase):
         partida.inicializar(palabra)
         resultado = partida.arriesgar("p")
         self.assertFalse(resultado)
-    
+
     def test_validar_terminado(self):
         partida = Partida()
         palabra = "hola"
         partida.inicializar(palabra)
         for letra in palabra:
-            self.assertFalse(partida.validar_terminado())
             partida.arriesgar(letra)
-        
+
         terminado = partida.validar_terminado()
         self.assertTrue(terminado)
+
+    def test_validar_terminado_con_palabra(self):
+        partida = Partida()
+        palabra = "hola"
+        partida.inicializar(palabra)
+        partida.arriesgar("hola")
+        terminado = partida.validar_terminado()
+        self.assertTrue(terminado)
+
 
     def test_arriesgar_palabra_valida(self):
         partida = Partida()
@@ -48,3 +56,11 @@ class TestComenzarPartida(TestCase):
         partida.inicializar(palabra)
         result = partida.arriesgar_palabra("chau")
         self.assertFalse(result)
+
+    def test_arriesgar_letra_valida(self):
+        partida = Partida()
+        palabra = "hola"
+        partida.inicializar(palabra)
+        result = partida.arriesgar_letra("h")
+        self.assertTrue(result)
+

@@ -17,14 +17,22 @@ class Partida():
         return palabra
 
     def arriesgar(self, letra):
+        if len(letra) > 1:
+            acierto = self.arriesgar_palabra(letra)
+        else:
+            acierto = self.arriesgar_letra(letra)
+        if not acierto:
+            self.intentos_restantes = self.intentos_restantes - 1
+            #self.letras_acertadas.append(letra)
+        else:
+            self.letras_acertadas.append(letra)
+        return acierto
+
+    def arriesgar_letra(self, letra):
         acierto = False
         if letra in self.get_palabra():
             if not letra in self.letras_acertadas:
-                self.letras_acertadas.append(letra)
-            acierto = True
-        else:
-            self.intentos_restantes = self.intentos_restantes - 1
-            #self.letras_acertadas.append(letra)
+                acierto = True
         return acierto
 
     def comenzar_partida(self):
@@ -42,10 +50,14 @@ class Partida():
             print "Perdiste.. la palabra era " + self.get_palabra()
 
     def solicitar_letra(self):
-        print "Ingrese una letra: "
+        print "Ingrese una o arriesgue una palabra: "
         return str(input())
 
     def validar_terminado(self):
+        for acertada in self.letras_acertadas:
+            if acertada == self.get_palabra():
+                self.resultado = True
+                return True
         for letra in self.get_palabra():
             if letra not in self.letras_acertadas:
                 self.resultado = False
