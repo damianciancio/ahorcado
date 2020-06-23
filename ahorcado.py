@@ -3,6 +3,21 @@ import random
 class Partida():
     def __init__(self):
         pass
+
+    def get_dict(self):
+        dictionary = {
+            "palabra": self.palabra,
+            "resultado": self.resultado,
+            "intentos_restantes": self.intentos_restantes,
+            "letras_acertadas": self.letras_acertadas
+        }
+        return dictionary
+
+    def create_from_dictionary(self, dictionary):
+        self.palabra = dictionary['palabra']
+        self.resultado = dictionary['resultado']
+        self.intentos_restantes = dictionary['intentos_restantes']
+        self.letras_acertadas = dictionary['letras_acertadas']
     
     def inicializar(self, palabra=None):
         if palabra == None:
