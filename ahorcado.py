@@ -63,6 +63,7 @@ class Partida():
     def arriesgar_letra(self, letra):
         acierto = False
         if letra in self.get_palabra():
+            
             if not letra in self.letras_acertadas:
                 acierto = True
         return acierto
