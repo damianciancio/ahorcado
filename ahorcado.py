@@ -9,7 +9,8 @@ class Partida():
             "palabra": self.palabra,
             "resultado": self.resultado,
             "intentos_restantes": self.intentos_restantes,
-            "letras_acertadas": self.letras_acertadas
+            "letras_acertadas": self.letras_acertadas,
+            "letras_rechazadas": self.letras_rechazadas
         }
         return dictionary
 
@@ -18,6 +19,7 @@ class Partida():
         self.resultado = dictionary['resultado']
         self.intentos_restantes = dictionary['intentos_restantes']
         self.letras_acertadas = dictionary['letras_acertadas']
+        self.letras_rechazadas = dictionary['letras_rechazadas']
     
     def inicializar(self, palabra=None):
         if palabra == None:
@@ -27,7 +29,7 @@ class Partida():
         self.resultado = None
         self.intentos_restantes = 7
         self.letras_acertadas = []
-        #self.letras_rechazadas = []
+        self.letras_rechazadas = []
 
 
     def get_palabra(self):
@@ -53,6 +55,7 @@ class Partida():
             acierto = self.arriesgar_letra(letra)
         if acierto==False:
             self.intentos_restantes = self.intentos_restantes - 1 
+            self.letras_rechazadas.append(letra)
         else:
             self.letras_acertadas.append(letra)
         return acierto
