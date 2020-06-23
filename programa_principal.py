@@ -17,31 +17,15 @@ def iniciar():
     partida.inicializar("hola")
     session["partida"] = partida.get_dict()
     session["mensaje"] = ""
-    session["letras_acertadas"] = ""
-    session["letras_rechazadas"] = ""
-    session["intentos_restantes"] = ""
-    return render_template('jugar.html', partida=session["partida"],mensaje=session["mensaje"],
-                                        letras_acertadas=session["letras_acertadas"],
-                                        letras_rechazadas=session["letras_rechazadas"],
-                                        intentos_restantes=session["intentos_restantes"])
+    #return render_template('jugar.html', partida=session["partida"],mensaje=session["mensaje"])
+    return redirect('/partida')
 
 @app.route('/partida', methods=['GET'])
 def partida():
     partida = Partida()
     partida.create_from_dictionary(session["partida"])
     mensaje = session["mensaje"]
-    letras_acertadas = session["letras_acertadas"]
-    letras_rechazadas = session["letras_rechazadas"]
-    intentos_restantes = session["intentos_restantes"]
-    if partida.validar_terminado()==False:
-        return render_template('jugar.html', partida=session["partida"],mensaje=session["mensaje"],
-                                            letras_acertadas=session["letras_acertadas"],
-                                            letras_rechazadas=session['letras_rechazadas'],
-                                            intentos_restantes=session['intentos_restantes'])
-    elif partida.validar_terminado()=='perdio':
-        return render_template('fin.html')
-    elif partida.validar_terminado()=='gano':
-        return render_template('gano.html')
+    return render_template('jugar.html', partida=partida, mensaje=session["mensaje"])
 
 @app.route('/arriesgar', methods=['POST'])
 def arriesgar():
@@ -52,11 +36,8 @@ def arriesgar():
         letra_arriesgada = request.form['letra']
         if partida.arriesgar(letra_arriesgada):
             session["mensaje"] = "Muy bien!"
-            session["letras_acertadas"] = 'Letras aceptadas: '+str(partida.letras_acertadas)+' - '
         else:
             session["mensaje"] = "Error"
-            session["letras_rechazadas"] = 'Letras rechazadas: '+str(partida.letras_rechazadas)+' - '
-            session["intentos_restantes"] = 'Intentos restantes: '+str(partida.intentos_restantes)
         session["partida"] = partida.get_dict()
         return redirect('/partida')
 

@@ -7,14 +7,23 @@
 <body>
     <DIV align="center">
         <h1>Bienvenidos al ahorcado</h1>
-        <form method="post" action="/arriesgar">
-            Ingrese la próxima letra o ingrese una palabra: <input type="text" name="letra">
-            <button type="sumbit">Probar!</button>
-        </form>
-        <p>{{ mensaje }}</p>
-        <p>{{ letras_acertadas }}</p>
-        <p>{{ letras_rechazadas }}</p>
-        <p>{{ intentos_restantes }}</p>
+        {% if partida.validar_terminado() == 'perdio' %}
+            <p>Perdiste</p>
+            <p>La palabra era: {{partida.palabra}}</p>
+            <p><a href="/">Volver al inicio</a></p>
+            <p><a href="/iniciar">Jugar nuevamente</a></p>
+        {% elif partida.validar_terminado() == 'gano' %}
+            <p>Ganaste</p>
+            <p>La palabra era: {{partida.palabra}}</p>
+            <p><a href="/">Volver al inicio</a></p>
+            <p><a href="/iniciar">Jugar nuevamente</a></p>
+        {% else %}
+            <form method="post" action="/arriesgar">
+                Ingrese la próxima letra o ingrese una palabra: <input type="text" name="letra">
+                <button type="sumbit">Probar!</button>
+            </form>
+            <p>{{ mensaje }}</p>
+        {% endif %}
     </DIV>
 </body>
 </html>
