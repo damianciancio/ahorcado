@@ -11,17 +11,29 @@ app.secret_key = "asdsadsadas"
 def hello_world():
     return render_template('home.html')
 
-@app.route('/partida', methods=['GET'])
-def partida():
+@app.route('/iniciar', methods=['GET'])
+def iniciar():
     partida = Partida()
     partida.inicializar("hola")
     session["partida"] = partida.get_dict()
     session["mensaje"] = ""
     return render_template('jugar.html', partida=session["partida"],mensaje=session["mensaje"])
 
+@app.route('/partida', methods=['GET'])
+def partida():
+    partida = Partida()
+    partida.create_from_dictionary(session["partida"])
+    mensaje = session["mensaje"]
+    if partida.validar_terminado()==False:
+        return render_template('jugar.html', partida=session["partida"],mensaje=session["mensaje"])
+    elif partida.validar_terminado()=='perdio':
+        return render_template('fin.html')
+    elif partida.validar_terminado()=='gano':
+        return render_template('gano.html')
 
 @app.route('/arriesgar', methods=['POST'])
 def arriesgar():
+    print(session["partida"])
     partida = Partida()
     partida.create_from_dictionary(session["partida"])
     if request.method == 'POST':
@@ -30,7 +42,8 @@ def arriesgar():
             session["mensaje"] = "Muy bien!"
         else:
             session["mensaje"] = "Error"
+        session["partida"] = partida.get_dict()
         return redirect('/partida')
 
-#app.run()
-
+if __name__ == "__main__":
+    app.run(debug=True) #El debug es para ver los errores

@@ -29,6 +29,7 @@ class Partida():
         self.letras_acertadas = []
         #self.letras_rechazadas = []
 
+
     def get_palabra(self):
         palabra = self.palabra
         return palabra
@@ -50,9 +51,8 @@ class Partida():
             acierto = self.arriesgar_palabra(letra)
         else:
             acierto = self.arriesgar_letra(letra)
-        if not acierto:
-            self.intentos_restantes = self.intentos_restantes - 1
-            #self.letras_acertadas.append(letra)
+        if acierto==False:
+            self.intentos_restantes = self.intentos_restantes - 1 
         else:
             self.letras_acertadas.append(letra)
         return acierto
@@ -65,22 +65,22 @@ class Partida():
         return acierto
 
     def comenzar_partida(self):
-        print "La longitud de la palabra es: " + str(self.get_longitud_palabra())
+        print("La longitud de la palabra es: " + str(self.get_longitud_palabra()))
         while not self.validar_terminado():
-            print "Te quedan " + str(self.get_intentos_restantes()) + " intentos restantes"
+            print("Te quedan " + str(self.get_intentos_restantes()) + " intentos restantes")
             letra = self.solicitar_letra()
             if self.arriesgar(letra):
-                print "Muy bien!"
+                print("Muy bien!")
             else:
-                print "Fallaste!"
+                print("Fallaste!")
 
         if self.validar_si_gano():
-            print "Ganaste! la palabra era " + self.get_palabra()
+            print("Ganaste! la palabra era " + self.get_palabra())
         else: 
-            print "Perdiste.. la palabra era " + self.get_palabra()
+            print("Perdiste.. la palabra era " + self.get_palabra())
 
     def solicitar_letra(self):
-        print "Ingrese una o arriesgue una palabra: "
+        print("Ingrese una o arriesgue una palabra: ")
         return str(input())
 
     def validar_si_gano(self):
@@ -95,8 +95,10 @@ class Partida():
         return True
 
     def validar_terminado(self):
-        if self.validar_si_gano() or self.intentos_restantes == 0:
-            return True
+        if self.validar_si_gano():
+            return 'gano'
+        if self.intentos_restantes == 0:
+            return 'perdio'
         return False
 
     def arriesgar_palabra(self, palabra):
