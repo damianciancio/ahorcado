@@ -7,6 +7,7 @@ from flask_session import Session
 app = Flask(__name__)
 app.secret_key = "asdsadsadas"
 
+
 @app.route('/', methods=['GET'])
 def hello_world():
     return render_template('home.html')
