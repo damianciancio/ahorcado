@@ -1,5 +1,6 @@
 from ahorcado import Partida
 from flask import Flask, session, render_template, request, redirect
+import os
 import base64
 from json import dumps
 from flask_session import Session
@@ -43,4 +44,5 @@ def arriesgar():
         return redirect('/partida')
 
 if __name__ == "__main__":
+    port = int(os.environ.get("PORT", 5000))
     app.run(debug=True) #El debug es para ver los errores
