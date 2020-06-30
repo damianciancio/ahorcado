@@ -3,7 +3,6 @@ from flask import Flask, session, render_template, request, redirect
 import os
 import base64
 from json import dumps
-from flask_session import Session
 
 app = Flask(__name__)
 app.secret_key = "asdsadsadas"
