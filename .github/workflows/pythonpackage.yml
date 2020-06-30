@@ -40,4 +40,4 @@ jobs:
     - name: Update code coverage
       run: |
         pip install codecov
-        codecov
+        codecov -t GITHUB_ACTION
