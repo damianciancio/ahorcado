@@ -38,5 +38,6 @@ jobs:
       run: |
         python -m unittest discover -p "*_test.py"
     - name: Update code coverage
+      run: |
         pip install codecov
         codecov
