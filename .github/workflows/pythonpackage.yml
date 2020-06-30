@@ -41,5 +41,5 @@ jobs:
       run: |
         pip install codecov
         CODECOV_TOKEN="ea813815-7b17-4e2a-947b-18444d19c763"
-        codecov -t CODECOV_TOKEN
+        # codecov -t CODECOV_TOKEN
         bash <(curl -s https://codecov.io/bash) -t token
