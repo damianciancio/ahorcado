@@ -40,4 +40,6 @@ jobs:
     - name: Update code coverage
       run: |
         pip install codecov
-        codecov -t GITHUB_ACTION
+        CODECOV_TOKEN="ea813815-7b17-4e2a-947b-18444d19c763"
+        codecov -t CODECOV_TOKEN
+        bash <(curl -s https://codecov.io/bash) -t token
