@@ -2,18 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/main.css') }}">
     <title>Ahorcado</title>
 </head>
 <body>
     <DIV align="center">
-        <h1>Bienvenidos al ahorcado</h1>
+        <h1>Ahorcado</h1>
         {% if partida.validar_terminado() == 'perdio' %}
-            <p>Perdiste</p>
+            <h1>Perdiste</h1>
             <p>La palabra era: {{partida.palabra}}</p>
             <p><a href="/">Volver al inicio</a></p>
             <p><a href="/iniciar">Jugar nuevamente</a></p>
         {% elif partida.validar_terminado() == 'gano' %}
-            <p>Ganaste</p>
+            <h1>Ganaste</h1>
             <p>La palabra era: {{partida.palabra}}</p>
             <p><a href="/">Volver al inicio</a></p>
             <p><a href="/iniciar">Jugar nuevamente</a></p>
@@ -21,6 +22,11 @@
             <form method="post" action="/arriesgar">
                 Ingrese la próxima letra o ingrese una palabra: <input type="text" name="letra">
                 <button type="sumbit">Probar!</button>
+                {% if partida.letras_acertadas or partida.letras_rechazadas %}
+                    <p>Letras acertadas: {{partida.letras_acertadas}}</p>
+                    <p>Letras rechazadas: {{partida.letras_rechazadas}}</p>
+                    <p>Intentos restantes: {{partida.intentos_restantes}}</p>
+                {% endif %}
             </form>
             <p>{{ mensaje }}</p>
         {% endif %}

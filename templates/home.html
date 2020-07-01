@@ -2,12 +2,19 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='css/main.css') }}">
     <title>Ahorcado</title>
 </head>
 <body>
     <DIV align="center">
         <h1 >Bienvenido al ahorcado</h1>
-        <a href="/iniciar">Comenzar!</a>
+        <div style="width:700px;height:120px;border:2px solid #000;">
+            <p> El ahorcado es un juego fácil y rápido para al menos dos personas. En nuestro caso, un jugador corresponde a la
+                máquina, donde elegirá palabras aleatoriamete para jugar las partidas. El otro jugador (Usted) tratará
+                de adivinar la palabra al preguntar las letras que contiene. EL objetivo es tratar de acertar la totalidad de las
+                letras en un número menor a 7 intentos. Caso contrario, habrá perdido la partida. Buena suerte! </p>
+        </div>
+        <a href="/iniciar">Jugar!</a>
     </DIV>
 </body>
 </html>

@@ -2,3 +2,9 @@ body{
     margin: 0;
     font-family: sans-serif;
 }
+
+body {background-color: #D3D3D3;}
+
+a {
+    color: black;
+  }
