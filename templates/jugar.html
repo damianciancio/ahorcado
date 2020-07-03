@@ -14,21 +14,21 @@
             <p><a href="/">Volver al inicio</a></p>
             <p><a href="/iniciar">Jugar nuevamente</a></p>
         {% elif partida.validar_terminado() == 'gano' %}
-            <h1>Ganaste</h1>
+            <h1 id="won-text">Ganaste</h1>
             <p>La palabra era: {{partida.palabra}}</p>
             <p><a href="/">Volver al inicio</a></p>
             <p><a href="/iniciar">Jugar nuevamente</a></p>
         {% else %}
             <form method="post" action="/arriesgar">
-                Ingrese la próxima letra o ingrese una palabra: <input type="text" name="letra">
+                Ingrese la próxima letra o ingrese una palabra: <input type="text" id="input-letra" name="letra">
                 <button type="sumbit">Probar!</button>
                 {% if partida.letras_acertadas or partida.letras_rechazadas %}
                     <p>Letras acertadas: {{partida.letras_acertadas}}</p>
                     <p>Letras rechazadas: {{partida.letras_rechazadas}}</p>
-                    <p>Intentos restantes: {{partida.intentos_restantes}}</p>
+                    <p>Intentos restantes: <span id="remaining-attempts">{{partida.intentos_restantes}}</span></p>
                 {% endif %}
             </form>
-            <p>{{ mensaje }}</p>
+            <p id="result-message">{{ mensaje }}</p>
         {% endif %}
     </DIV>
 </body>
