@@ -23,8 +23,8 @@
                 Ingrese la próxima letra o ingrese una palabra: <input type="text" id="input-letra" name="letra">
                 <button type="sumbit">Probar!</button>
                 {% if partida.letras_acertadas or partida.letras_rechazadas %}
-                    <p>Letras acertadas: {{partida.letras_acertadas}}</p>
-                    <p>Letras rechazadas: {{partida.letras_rechazadas}}</p>
+                    <p> {{partida.progreso_palabra}}</p>
+                    <p>Letras rechazadas: {{partida.get_letras_rechazadas_html()}}</p>
                     <p>Intentos restantes: <span id="remaining-attempts">{{partida.intentos_restantes}}</span></p>
                 {% endif %}
             </form>

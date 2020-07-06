@@ -10,7 +10,8 @@ class Partida():
             "resultado": self.resultado,
             "intentos_restantes": self.intentos_restantes,
             "letras_acertadas": self.letras_acertadas,
-            "letras_rechazadas": self.letras_rechazadas
+            "letras_rechazadas": self.letras_rechazadas,
+            "progreso_palabra": self.get_progreso_palabra()
         }
         return dictionary
 
@@ -20,6 +21,7 @@ class Partida():
         self.intentos_restantes = dictionary['intentos_restantes']
         self.letras_acertadas = dictionary['letras_acertadas']
         self.letras_rechazadas = dictionary['letras_rechazadas']
+        self.progreso_palabra = dictionary['progreso_palabra']
     
     def inicializar(self, palabra=None):
         if palabra == None:
@@ -30,7 +32,26 @@ class Partida():
         self.intentos_restantes = 7
         self.letras_acertadas = []
         self.letras_rechazadas = []
+        self.progreso_palabra = ''
 
+    def get_progreso_palabra(self):
+        progreso = []
+        self.progreso_palabra = ''
+        for i in range(int(self.get_longitud_palabra())):
+            if (self.palabra[i] in self.letras_acertadas):
+                progreso.append(self.palabra[i])
+            else: 
+                progreso.append('_')
+            progreso.append(' ')
+        for p in progreso:
+            self.progreso_palabra += p
+        return self.progreso_palabra
+
+    def get_letras_rechazadas_html(self):
+        lista_letras = []
+        for letra in self.letras_rechazadas:
+            lista_letras.append(letra + ' - ')
+        return ''.join([str(letra) for letra in lista_letras]) 
 
     def get_palabra(self):
         palabra = self.palabra
