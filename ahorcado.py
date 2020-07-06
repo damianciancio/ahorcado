@@ -1,8 +1,6 @@
 import random
 
 class Partida():
-    def __init__(self):
-        pass
 
     def get_dict(self):
         dictionary = {
@@ -83,9 +81,7 @@ class Partida():
 
     def arriesgar_letra(self, letra):
         acierto = False
-        if letra in self.get_palabra():
-            
-            if not letra in self.letras_acertadas:
+        if (letra in self.get_palabra()) and (letra not in self.letras_acertadas):
                 acierto = True
         return acierto
 
