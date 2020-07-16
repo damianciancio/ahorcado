@@ -2,6 +2,7 @@ import pytest
 import os
 from pytest_bdd import scenarios, given, when,then, parsers
 from selenium.webdriver import Chrome
+from selenium import webdriver
 from selenium.webdriver.common.keys import Keys
 
 scenarios('../features/ahorcado.feature')
@@ -9,7 +10,12 @@ scenarios('../features/ahorcado.feature')
 @pytest.fixture
 def browser():
     # Initialize ChromeDriver
-    driver = Chrome()
+    options = webdriver.ChromeOptions()
+    options.add_argument("--no-sandbox");
+    options.add_argument("--disable-dev-shm-usage");
+    options.add_argument("--headless");
+
+    driver = Chrome(options=options)
 
     # Wait implicitly for elements to be ready before attempting interactions
     driver.implicitly_wait(10)
