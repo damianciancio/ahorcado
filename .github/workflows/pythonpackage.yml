@@ -37,12 +37,18 @@ jobs:
     - name: Test with unittest
       run: |
         python -m unittest discover -p "*_test.py"
-    - name: Update code coverage
+    #- name: Update code coverage
+    #  run: |
+    #    pip install codecov
+    #    CODECOV_TOKEN="ea813815-7b17-4e2a-947b-18444d19c763"
+    #    # codecov -t CODECOV_TOKEN
+    #    bash <(curl -s https://codecov.io/bash) -t token
+    - name: Generate coverage report
       run: |
         pip install codecov
-        CODECOV_TOKEN="ea813815-7b17-4e2a-947b-18444d19c763"
-        # codecov -t CODECOV_TOKEN
-        bash <(curl -s https://codecov.io/bash) -t token
+        coverage erase
+        coverage run -m pytest ahorcado.py app.py partida_test.py test/test_web.py
+        coverage report
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
       env:
