@@ -47,7 +47,7 @@ jobs:
       run: |
         pip install codecov
         coverage erase
-        coverage run -m pytest ahorcado.py app.py partida_test.py test/test_web.py
+        coverage run -m pytest ahorcado.py app.py partida_test.py tests/test_web.py
         coverage report
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
