@@ -57,4 +57,8 @@ jobs:
     - name: Front-end test
       env:
         URL_TEST: ${{ secrets.URL_TEST }}
-      run: python -m pytest tests/test_web.py
+      run: |
+        set -ex
+        wget https://dl.google.com/linux/direct/google-chrome-stable_current_amd64.deb
+        sudo apt install ./google-chrome-stable_current_amd64.deb
+        python -m pytest tests/test_web.py
