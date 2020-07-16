@@ -1,6 +1,3 @@
 Flask
 gunicorn
 codecov
-pytest_bdd
-selenium.webdriver
-selenium.webdriver.common.keys
