@@ -3,3 +3,4 @@ gunicorn
 codecov
 pytest
 pytest_bdd
+selenium
