@@ -4,10 +4,15 @@ Feature: Funcionalidad de Ahorcado
     When ingreso p
     Then obtengo un mensaje de error
 
-    Scenario: Ingreso de palabra
+    Scenario: Ingreso de palabra correcta
     Given el comienzo de un nuevo juego con la palabra hola
     When ingreso hola
     Then gano la partida
+
+    Scenario: Ingreso de palabra incorrecta
+    Given el comienzo de un nuevo juego con la palabra hola
+    When ingreso chau
+    Then obtengo un mensaje de error
 
     Scenario: Ingreso letra correcta
     Given el comienzo de un nuevo juego con la palabra hola

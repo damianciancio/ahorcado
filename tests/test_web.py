@@ -1,5 +1,5 @@
 import pytest
-
+import os
 from pytest_bdd import scenarios, given, when,then, parsers
 from selenium.webdriver import Chrome
 from selenium.webdriver.common.keys import Keys
@@ -22,7 +22,10 @@ def browser():
 
 @given(parsers.parse('el comienzo de un nuevo juego con la palabra hola'))
 def home(browser):
-    browser.get('http://localhost:5000')
+    url = os.getenv('URL_TEST')
+    if url is None:
+        url = 'http://localhost:5000'
+    browser.get(url)
     browser.find_element_by_id('iniciar-link').click()
 
 @when(parsers.parse("ingreso {letter}"))
