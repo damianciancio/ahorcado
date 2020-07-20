@@ -47,10 +47,10 @@ jobs:
       run: |
         pip install codecov
         coverage erase
-        coverage run -m pytest ahorcado.py
+    #   coverage run -m pytest ahorcado.py
         coverage report
-        CODECOV_TOKEN="ea813815-7b17-4e2a-947b-18444d19c763"
-        bash <(curl -s https://codecov.io/bash) -t token
+    #    CODECOV_TOKEN="ea813815-7b17-4e2a-947b-18444d19c763"
+    #    bash <(curl -s https://codecov.io/bash) -t token
         coverage xml ahorcado.py
     - name: SonarCloud Scan
       uses: sonarsource/sonarcloud-github-action@master
