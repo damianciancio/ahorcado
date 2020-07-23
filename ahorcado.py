@@ -68,6 +68,7 @@ class Partida():
         return self.intentos_restantes
 
     def arriesgar(self, letra):
+
         if len(letra) > 1:
             acierto = self.arriesgar_palabra(letra)
         else:
@@ -77,7 +78,7 @@ class Partida():
             self.letras_rechazadas.append(letra)
         else:
             self.letras_acertadas.append(letra)
-        return acierto
+        return not acierto
 
     def arriesgar_letra(self, letra):
         acierto = False
