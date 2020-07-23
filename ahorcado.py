@@ -78,7 +78,7 @@ class Partida():
             self.letras_rechazadas.append(letra)
         else:
             self.letras_acertadas.append(letra)
-        return not acierto
+        return acierto
 
     def arriesgar_letra(self, letra):
         acierto = False
